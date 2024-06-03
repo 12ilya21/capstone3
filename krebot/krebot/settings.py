@@ -132,9 +132,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'site-packages/rest_framework/static/rest_framework/')
-]
+STATIC_ROOT = '/home/ubuntu/venvs/env/lib/python3.10/site-packages/rest_framework/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
