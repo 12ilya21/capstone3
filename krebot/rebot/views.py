@@ -7,6 +7,7 @@ from .models import RestaurantInfo1, Bookmark
 from .serializers import BookmarkSerializer, UserSerializer
 from django.contrib.auth.models import User
 
+from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
 # User registration
@@ -20,9 +21,9 @@ class UserListView(generics.ListAPIView):
     serializer_class = UserSerializer
 
 # 북마크 생성
-@csrf_exempt
 class UserBookmarkCreateView(APIView):
-
+    
+    @method_decorator(csrf_exempt)
     def post(self, request):
         username = request.data.get('username')
         restaurant_name = request.data.get('restaurant_name')
@@ -52,9 +53,9 @@ class UserBookmarkCreateView(APIView):
             return Response({"error": "Bookmark already exists"}, status=status.HTTP_400_BAD_REQUEST)
         
 # 북마크 삭제
-@csrf_exempt
 class UserBookmarkDeleteView(APIView):
-
+    
+    @method_decorator(csrf_exempt)
     def post(self, request):
         username = request.data.get('username')
         restaurant_name = request.data.get('restaurant_name')
@@ -84,9 +85,9 @@ class UserBookmarkDeleteView(APIView):
             return Response({"error": "An error occurred while deleting the bookmark"}, status=status.HTTP_400_BAD_REQUEST)
         
 # 북마크 표시
-@csrf_exempt
 class BookmarkListView(APIView):
-
+    
+    @method_decorator(csrf_exempt)
     def post(self, request):
         username = request.data.get('username')
         if not username:
@@ -97,9 +98,9 @@ class BookmarkListView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 # 식당 좌표 넘기기
-@csrf_exempt
 class RestaurantCoordinatesView(APIView):
-
+    
+    @method_decorator(csrf_exempt)
     def post(self, request):
         restaurant_name = request.data.get('restaurant_name')
         
