@@ -132,13 +132,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# 정적 파일들이 이미 존재하는 디렉토리를 지정
-STATIC_ROOT = '/home/ubuntu/venvs/env/lib/python3.10/site-packages/rest_framework/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# 추가적인 정적 파일 디렉토리
 STATICFILES_DIRS = [
-    '/home/ubuntu/venvs/env/lib/python3.10/site-packages/rest_framework/static/rest_framework/'
+    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'rest_framework/static/rest_framework'),
 ]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
