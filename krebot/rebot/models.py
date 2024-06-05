@@ -3,7 +3,6 @@ from django.db import models
 class RestaurantInfo1(models.Model):
     name = models.CharField(max_length=255, null=False)
     bookmark_count = models.IntegerField(default=0)
-    image = models.ImageField(upload_to='images/')
     latitude = models.FloatField(null=False, default =0.0)
     longitude = models.FloatField(null=False, default =0.0)
 
