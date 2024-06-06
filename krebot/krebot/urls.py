@@ -16,14 +16,21 @@ Including another URLconf
 """
 from django.urls import path
 from django.contrib import admin
-from rebot.views import UserBookmarkCreateView, UserBookmarkDeleteView, BookmarkListView, RestaurantCoordinatesView, UserCreateView, UserListView
+from rebot.views import UserBookmarkCreateView, UserBookmarkDeleteView, BookmarkListView, RestaurantCoordinatesView, register, login_view, logout_view
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('register/', register, name='register'),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
     path('bookmark-create/', UserBookmarkCreateView.as_view()),
     path('bookmark-delete/', UserBookmarkDeleteView.as_view()),
     path('bookmark-list/', BookmarkListView.as_view()),
     path('map-coordinates/', RestaurantCoordinatesView.as_view()),
-    path('users/create/', UserCreateView.as_view(), name='user-create'),
-    path('users/', UserListView.as_view(), name='user-list'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
